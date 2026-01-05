@@ -1,7 +1,6 @@
-version: "3"
 services:
   app:
-    image: "ghcr.io/luketainton/docker-radius:latest"
+    image: "git.tainton.uk/repos/docker-radius:latest"
     restart: "unless-stopped"
     volumes:
       - "./clients.conf:/etc/raddb/clients.conf"

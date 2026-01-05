@@ -1,0 +1,51 @@
+name: CI
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v6.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Run Hadolint
+        uses: hadolint/hadolint-action@v3.3.0
+        with:
+          dockerfile: Dockerfile
+          output-file: hadolint.out
+          format: tty
+          no-fail: true
+      
+      - name: Print Hadolint Results
+        if: ${{ always() }}
+        run: cat hadolint.out
+
+      # - name: SonarQube Scan
+      #   uses: SonarSource/sonarqube-scan-action@v5.2.0
+      #   env:
+      #     SONAR_HOST_URL: ${{ secrets.SONARQUBE_HOST_URL }}
+      #     SONAR_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+
+      # - name: Snyk SAST Scan
+      #   uses: snyk/actions/python@master
+      #   env:
+      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      #   with:
+      #     # command: snyk
+      #     args: snyk code test --all-projects --exclude=.archive
+
+      - name: Snyk Vulnerability Scan
+        uses: snyk/actions/python@master
+        continue-on-error: true # Sometimes vulns aren't immediately fixable
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: test --all-projects

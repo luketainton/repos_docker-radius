@@ -1,4 +1,4 @@
-FROM alpine:3.22.1 as build
+FROM alpine:3.23.2 as build
 LABEL maintainer="Luke Tainton <luke@tainton.uk>"
 LABEL org.opencontainers.image.source="https://git.tainton.uk/repos/docker-radius"
 
@@ -17,4 +17,4 @@ ADD users /etc/raddb/users
 ADD radiusd.conf /etc/raddb/radiusd.conf
 RUN chmod -R o-w /etc/raddb/
 ENTRYPOINT ["webproc","-o","restart","-c","/etc/raddb/users","-c", "/etc/raddb/clients.conf", "-c", "/etc/raddb/radiusd.conf","--","radiusd","-f","-l","stdout"]
-EXPOSE 1812/udp 8080/tcp
+EXPOSE 1812/udp 1813/udp 8080/tcp

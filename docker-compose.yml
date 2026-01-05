@@ -7,5 +7,6 @@ services:
       - "./users:/etc/raddb/users"
       - "./radiusd.conf:/etc/raddb/radiusd.conf"
     ports:
-      - "1812:1812/udp"
-      - "18080:8080/tcp"
+      - "1812:1812/udp"  # RADIUS Authentication
+      - "1813:1813/udp"  # RADIUS Accounting
+      - "18080:8080/tcp" # Web Interface

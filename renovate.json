@@ -1,0 +1,23 @@
+{
+  "assignAutomerge": false,
+  "assigneesFromCodeOwners": false,
+  "dependencyDashboardAutoclose": true,
+  "extends": ["config:recommended", "docker:enableMajor"],
+  "ignorePaths": ["**/.archive/**"],
+  "labels": ["type/dependencies"],
+  "platformCommit": "enabled",
+  "rebaseWhen": "behind-base-branch",
+  "rollbackPrs": true,
+  "semanticCommits": "enabled",
+  "semanticCommitScope": "deps",
+  "semanticCommitType": "feat",
+  "vulnerabilityAlerts": {
+    "commitMessagePrefix": "[SECURITY] ",
+    "enabled": true,
+    "labels": ["security"],
+    "prCreation": "immediate"
+  },
+  "lockFileMaintenance": {
+    "enabled": true
+  }
+}

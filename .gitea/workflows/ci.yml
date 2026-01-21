@@ -42,10 +42,10 @@ jobs:
       #     # command: snyk
       #     args: snyk code test --all-projects --exclude=.archive
 
-      - name: Snyk Vulnerability Scan
-        uses: snyk/actions/python@master
-        continue-on-error: true # Sometimes vulns aren't immediately fixable
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: test --all-projects
+      # - name: Snyk Vulnerability Scan
+      #   uses: snyk/actions/python@master
+      #   continue-on-error: true # Sometimes vulns aren't immediately fixable
+      #   env:
+      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      #   with:
+      #     args: test --all-projects

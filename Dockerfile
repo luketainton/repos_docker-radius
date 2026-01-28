@@ -1,4 +1,4 @@
-FROM alpine:3.23.2 as build
+FROM alpine:3.23.3 as build
 LABEL maintainer="Luke Tainton <luke@tainton.uk>"
 LABEL org.opencontainers.image.source="https://git.tainton.uk/repos/docker-radius"
 

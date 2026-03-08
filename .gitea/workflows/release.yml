@@ -88,15 +88,15 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: .
-          push: false
+          push: true
           load: true
           annotations: ${{ steps.meta.outputs.annotations }}
           labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ steps.meta.outputs.tags }}
 
-      - name: Push images
-        run: |
-          strtags="${{ steps.meta.outputs.tags }}"
-          readarray -t lines <<<"$strtags"
-          for element in "${lines[@]}"; do docker push "$element"; done
-          unset strtags lines
+      # - name: Push images
+      #   run: |
+      #     strtags="${{ steps.meta.outputs.tags }}"
+      #     readarray -t lines <<<"$strtags"
+      #     for element in "${lines[@]}"; do docker push "$element"; done
+      #     unset strtags lines

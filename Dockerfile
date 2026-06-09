@@ -2,7 +2,7 @@ FROM alpine:3.24.0 AS webproc
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 ENV WEBPROCVERSION=0.4.0
 ENV WEBPROCURL=https://github.com/jpillora/webproc/releases/download/v$WEBPROCVERSION/webproc_"$WEBPROCVERSION"_linux_amd64.gz
-RUN apk add --no-cache curl=8.17.0-r1 && \
+RUN apk add --no-cache curl=8.20.0-r1 && \
     curl -sL $WEBPROCURL | gzip -d - > /usr/local/bin/webproc && \
     chmod +x /usr/local/bin/webproc
 
@@ -12,7 +12,7 @@ LABEL org.opencontainers.image.source="https://git.tainton.uk/repos/docker-radiu
 LABEL org.opencontainers.image.description="FreeRADIUS server with web administration interface"
 LABEL org.opencontainers.image.title="docker-radius"
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
-RUN apk --no-cache add freeradius=3.0.27-r2
+RUN apk --no-cache add freeradius=3.0.27-r3
 COPY --from=webproc /usr/local/bin/webproc /usr/local/bin/webproc
 COPY clients.conf /etc/raddb/clients.conf
 COPY users /etc/raddb/users

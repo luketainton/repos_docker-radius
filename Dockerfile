@@ -1,4 +1,4 @@
-FROM alpine:3.23.4 AS webproc
+FROM alpine:3.24.0 AS webproc
 SHELL ["/bin/ash", "-o", "pipefail", "-c"]
 ENV WEBPROCVERSION=0.4.0
 ENV WEBPROCURL=https://github.com/jpillora/webproc/releases/download/v$WEBPROCVERSION/webproc_"$WEBPROCVERSION"_linux_amd64.gz
@@ -6,7 +6,7 @@ RUN apk add --no-cache curl=8.17.0-r1 && \
     curl -sL $WEBPROCURL | gzip -d - > /usr/local/bin/webproc && \
     chmod +x /usr/local/bin/webproc
 
-FROM alpine:3.23.4
+FROM alpine:3.24.0
 LABEL maintainer="Luke Tainton <luke@tainton.uk>"
 LABEL org.opencontainers.image.source="https://git.tainton.uk/repos/docker-radius"
 LABEL org.opencontainers.image.description="FreeRADIUS server with web administration interface"
